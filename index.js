@@ -21,12 +21,20 @@ function onResults(results) {
       });
       drawLandmarks(canvasCtx, landmarks, { color: "#FF0000", lineWidth: 2 });
 
-      if (landmarks[8].y < landmarks[4].y) {
-        note.textContent = "index finger up";
+      if (landmarks[8].y < landmarks[7].y) {
+        note.textContent = "X: " + (landmarks[8].x * window.innerWidth).toString()  
+                          + "\nY: " + (landmarks[8].y * window.innerHeight).toString();
       }
-      if (landmarks[8].y > landmarks[4].y) {
+      if (landmarks[8].y > landmarks[7].y) {
         note.textContent = "index finger down";
       }
+      if (Math.hypot((landmarks[8].x - landmarks[4].x) * window.innerWidth, (landmarks[8].y - landmarks[4].y) * window.innerHeight) < 50 ){
+        var currentDistance = ((landmarks[8].y + landmarks[4].y) / 2 * window.innerHeight)
+        console.log(currentDistance)
+        
+      }
+
+      //console.log(Math.hypot((landmarks[8].x - landmarks[4].x) * window.innerWidth, (landmarks[8].y - landmarks[4].y) * window.innerHeight))
     }
   }
   canvasCtx.restore();
@@ -53,3 +61,11 @@ const camera = new Camera(videoElement, {
   height: 200,
 });
 camera.start();
+
+
+//scrolling stuff
+window.scroll({
+  top: 100,
+  left: 100,
+  behavior: 'smooth'
+});
