@@ -1,5 +1,6 @@
 const videoElement = document.getElementsByClassName("input_video")[0];
 const canvasElement = document.getElementsByClassName("output_canvas")[0];
+const note = document.getElementById("state");
 const canvasCtx = canvasElement.getContext("2d");
 
 function onResults(results) {
@@ -16,9 +17,16 @@ function onResults(results) {
     for (const landmarks of results.multiHandLandmarks) {
       drawConnectors(canvasCtx, landmarks, HAND_CONNECTIONS, {
         color: "#00FF00",
-        lineWidth: 5,
+        lineWidth: 3,
       });
       drawLandmarks(canvasCtx, landmarks, { color: "#FF0000", lineWidth: 2 });
+
+      if (landmarks[8].y < landmarks[4].y) {
+        note.textContent = "index finger up";
+      }
+      if (landmarks[8].y > landmarks[4].y) {
+        note.textContent = "index finger down";
+      }
     }
   }
   canvasCtx.restore();
@@ -41,7 +49,7 @@ const camera = new Camera(videoElement, {
   onFrame: async () => {
     await hands.send({ image: videoElement });
   },
-  width: 1280,
-  height: 720,
+  width: 300,
+  height: 200,
 });
 camera.start();
