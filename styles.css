@@ -1,0 +1,56 @@
+body {
+  padding: 20px;
+}
+
+.toggleButton {
+  padding: 10px;
+  background: rgb(161, 161, 155);
+  color: white;
+  display: inline;
+}
+
+.mb10 {
+  margin-bottom: 10px;
+}
+
+.mt10 {
+  margin-top: 10px;
+}
+
+.updatenote {
+  padding: 10px;
+  background: rgb(245, 147, 20);
+  color: white;
+  display: inline;
+}
+
+vidoe {
+  min-width: 40%;
+  object-fit: cover;
+}
+
+.canvasbox {
+  border-radius: 3px;
+  margin-rigth: 10px;
+  width: 500px;
+  height: 338px;
+  border-bottom: 3px solid #6868ce;
+  box-shadow: 0 2px 3px 0;
+}
+
+.alphabets {
+  position: absolute;
+  color: greenyellow;
+  font-size: 5vh;
+  display: flex;
+  bottom: 400px;
+  left: 600px;
+  width: 20%;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.BigLetter {
+  color: red;
+  font-size: 10vh;
+}
