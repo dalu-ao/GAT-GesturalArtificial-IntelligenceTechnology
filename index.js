@@ -2,8 +2,47 @@ const videoElement = document.getElementsByClassName("input_video")[0];
 const canvasElement = document.getElementsByClassName("output_canvas")[0];
 const note = document.getElementById("state");
 const canvasCtx = canvasElement.getContext("2d");
+
 let cDistance = 0;
 let pDistance = 0;
+
+const getGesture = function (points) {
+  if (
+    Math.hypot(
+      (points[8].x - points[4].x) * window.innerWidth,
+      (points[8].y - points[4].y) * window.innerHeight
+    ) < 50
+  ) {
+    return "thumb_index_pinch";
+  }
+
+  if (
+    Math.hypot(
+      (points[8].x - points[12].x) * window.innerWidth,
+      (points[8].y - points[12].y) * window.innerHeight
+    ) < 50
+  ) {
+    return "thumb_middle_pinch";
+  }
+
+  if (
+    Math.hypot(
+      (points[8].x - points[16].x) * window.innerWidth,
+      (points[8].y - points[16].y) * window.innerHeight
+    ) < 50
+  ) {
+    return "thumb_ring_pinch";
+  }
+
+  if (
+    Math.hypot(
+      (points[8].x - points[16].x) * window.innerWidth,
+      (points[8].y - points[16].y) * window.innerHeight
+    ) < 50
+  ) {
+    return "thumb_index_pinch";
+  }
+};
 
 function onResults(results) {
   canvasCtx.save();
@@ -35,12 +74,7 @@ function onResults(results) {
         note.textContent = "index finger down";
       }
 
-      if (
-        Math.hypot(
-          (landmarks[8].x - landmarks[4].x) * window.innerWidth,
-          (landmarks[8].y - landmarks[4].y) * window.innerHeight
-        ) < 50
-      ) {
+      if (getGesture(landmarks) == "thumb_index_pinch") {
         cDistance =
           ((landmarks[8].y + landmarks[4].y) / 2) * window.innerHeight;
         console.log("pDistance: " + pDistance);
@@ -48,7 +82,6 @@ function onResults(results) {
         console.log(cDistance - pDistance);
         window.scrollBy(0, (cDistance - pDistance) * -3);
         pDistance = cDistance;
-        count++;
         console.log(count);
       } else {
         pDistance =
