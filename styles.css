@@ -58,3 +58,7 @@ vidoe {
   color: red;
   font-size: 10vh;
 }
+
+.container {
+  position: fixed;
+}
