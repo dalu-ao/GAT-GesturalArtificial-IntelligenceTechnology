@@ -35,9 +35,9 @@ function onResults(results) {
         cDistance = ((landmarks[8].y + landmarks[4].y) / 2 * window.innerHeight)
         console.log("pDistance: " + pDistance)
         console.log("cDistance " + cDistance)
-        pDistance = cDistance
-        console.log(cDistance - pDistance)
         window.scrollBy(0, (cDistance - pDistance));
+        console.log(cDistance - pDistance)
+        pDistance = cDistance
       }
 
     }
