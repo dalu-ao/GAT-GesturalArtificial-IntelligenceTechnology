@@ -13,7 +13,7 @@ const getGesture = function (points) {
       (points[8].y - points[4].y) * window.innerHeight
     ) < 50
   ) {
-    console.log("thumb_index_pinch")
+    //console.log("thumb_index_pinch")
     return "thumb_index_pinch";
   }
   /*
@@ -48,15 +48,6 @@ const getGesture = function (points) {
 };
 
 const getSign = function(points) {
-  if (points[4].y < points[6].y
-    && points[8].y > points[5].y
-    && points[12].y > points[9].y
-    && points[16].y > points[13].y
-    && points[20].y > points[17].y
-  ) {
-    console.log("Sign for A")
-  }
-
   if (points[4].y < points[3].y
     && points[8].y < points[7].y
     && points[12].y < points[11].y
@@ -66,16 +57,16 @@ const getSign = function(points) {
     console.log("Sign for Hello")
   }
 
-  if (points[20].y < points[19].y
+  else if (points[20].y < points[19].y
     && points[16].y > points[14].y
     && points[12].y > points[10].y
     && points[8].y < points[7].y
     && points[4].y < points[3].y
   ) {
-    console.log("Sign for Love")
+    console.log("Sign for I Love You")
   }
 
-  if (points[6].y < points[7].y
+  else if (points[6].y < points[7].y
     && points[10].y < points[11].y
     && points[14].y < points[15].y
     && points[18].y < points[19].y
@@ -87,7 +78,7 @@ const getSign = function(points) {
     console.log("Sign for Yes")
   }
 
-  if (
+  else if (
     Math.hypot(
     (points[4].x - points[8].x),
     (points[4].y - points[8].y)) < .1
