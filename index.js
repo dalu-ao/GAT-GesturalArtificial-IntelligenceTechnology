@@ -15,7 +15,6 @@ const getGesture = function (points) {
   ) {
     return "thumb_index_pinch";
   }
-
   if (
     Math.hypot(
       (points[8].x - points[12].x) * window.innerWidth,
