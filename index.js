@@ -29,12 +29,12 @@ function onResults(results) {
         note.textContent = "index finger down";
       }
       if (Math.hypot((landmarks[8].x - landmarks[4].x) * window.innerWidth, (landmarks[8].y - landmarks[4].y) * window.innerHeight) < 50 ){
-        var currentDistance = ((landmarks[8].y + landmarks[4].y) / 2 * window.innerHeight)
-        console.log(currentDistance)
+        let prevDistance = ((landmarks[8].y + landmarks[4].y) / 2 * window.innerHeight)
+        console.log(prevDistance)
+        window.scrollBy(0,10);
         
       }
 
-      //console.log(Math.hypot((landmarks[8].x - landmarks[4].x) * window.innerWidth, (landmarks[8].y - landmarks[4].y) * window.innerHeight))
     }
   }
   canvasCtx.restore();
