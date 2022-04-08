@@ -16,6 +16,7 @@ const getGesture = function (points) {
     console.log("thumb_index_pinch")
     return "thumb_index_pinch";
   }
+  /*
   if (
     Math.hypot(
       (points[8].x - points[12].x) * window.innerWidth,
@@ -43,10 +44,11 @@ const getGesture = function (points) {
   ) {
     console.log("peace sign")
   }
+  */
 };
 
 const getSign = function(points) {
-  if (points[4].y < points[5].y
+  if (points[4].y < points[6].y
     && points[8].y > points[5].y
     && points[12].y > points[9].y
     && points[16].y > points[13].y
@@ -55,22 +57,49 @@ const getSign = function(points) {
     console.log("Sign for A")
   }
 
-  if (points[4].x < points[3].x
-    && points[4].y > points[5].y
+  if (points[4].y < points[3].y
     && points[8].y < points[7].y
     && points[12].y < points[11].y
     && points[16].y < points[15].y
     && points[20].y < points[19].y
   ) {
-    console.log("Sign for B")
+    console.log("Sign for Hello")
   }
 
+  if (points[20].y < points[19].y
+    && points[16].y > points[14].y
+    && points[12].y > points[10].y
+    && points[8].y < points[7].y
+    && points[4].y < points[3].y
+  ) {
+    console.log("Sign for Love")
+  }
 
+  if (points[6].y < points[7].y
+    && points[10].y < points[11].y
+    && points[14].y < points[15].y
+    && points[18].y < points[19].y
+    && points[4].y > points[11].y
+    && points[4].y > points[15].y
+    && points[4].x < points[8].x
+    && points[4].y > points[16].y
+  ) {
+    console.log("Sign for Yes")
+  }
 
-  console.log(
-    Math.hypot(points[20].x - points[8].x,
-      points[20].y - points[8].y
-    ))
+  if (
+    Math.hypot(
+    (points[4].x - points[8].x),
+    (points[4].y - points[8].y)) < .1
+    && Math.hypot(
+    (points[4].x - points[12].x),
+    (points[4].y - points[12].y)) < .1
+    && points[20].y > points[19].y
+    && points[16].y > points[15].y
+    && points[4].y < points[16].y
+  ) {
+    console.log("Sign for No")
+  }
 
 }
 
@@ -104,19 +133,19 @@ function onResults(results) {
         note.textContent = "index finger down";
       }
 
-      /*if (getGesture(landmarks) == "thumb_index_pinch") {
+      if (getGesture(landmarks) == "thumb_index_pinch") {
         cDistance =
           ((landmarks[8].y + landmarks[4].y) / 2) * window.innerHeight;
-        console.log("pDistance: " + pDistance);
-        console.log("cDistance " + cDistance);
-        console.log(cDistance - pDistance);
+        //console.log("pDistance: " + pDistance);
+        //console.log("cDistance " + cDistance);
+        //console.log(cDistance - pDistance);
         window.scrollBy(0, (cDistance - pDistance) * -3);
         pDistance = cDistance;
-        console.log(count);
+        //console.log(count);
       } else {
         pDistance =
           ((landmarks[8].y + landmarks[4].y) / 2) * window.innerHeight;
-      }/*/
+      }
 
       getSign(landmarks)
     }
