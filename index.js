@@ -2,8 +2,8 @@ const videoElement = document.getElementsByClassName("input_video")[0];
 const canvasElement = document.getElementsByClassName("output_canvas")[0];
 const note = document.getElementById("state");
 const canvasCtx = canvasElement.getContext("2d");
-let cDistance = 0
-let pDistance = 0
+let cDistance = 0;
+let pDistance = 0;
 
 function onResults(results) {
   canvasCtx.save();
@@ -16,6 +16,7 @@ function onResults(results) {
     canvasElement.height
   );
   if (results.multiHandLandmarks) {
+    let count = 0;
     for (const landmarks of results.multiHandLandmarks) {
       drawConnectors(canvasCtx, landmarks, HAND_CONNECTIONS, {
         color: "#00FF00",
@@ -24,25 +25,35 @@ function onResults(results) {
       drawLandmarks(canvasCtx, landmarks, { color: "#FF0000", lineWidth: 2 });
 
       if (landmarks[8].y < landmarks[7].y) {
-        note.textContent = "X: " + (landmarks[8].x * window.innerWidth).toString()  
-                          + "\nY: " + (landmarks[8].y * window.innerHeight).toString();
+        note.textContent =
+          "X: " +
+          (landmarks[8].x * window.innerWidth).toString() +
+          "\nY: " +
+          (landmarks[8].y * window.innerHeight).toString();
       }
       if (landmarks[8].y > landmarks[7].y) {
         note.textContent = "index finger down";
       }
 
-      if (Math.hypot((landmarks[8].x - landmarks[4].x) * window.innerWidth, (landmarks[8].y - landmarks[4].y) * window.innerHeight) < 50 ){
-        cDistance = ((landmarks[8].y + landmarks[4].y) / 2 * window.innerHeight)
-        console.log("pDistance: " + pDistance)
-        console.log("cDistance " + cDistance)
-        console.log(cDistance - pDistance)
-        window.scrollBy(0, cDistance - pDistance);
-        pDistance = cDistance
+      if (
+        Math.hypot(
+          (landmarks[8].x - landmarks[4].x) * window.innerWidth,
+          (landmarks[8].y - landmarks[4].y) * window.innerHeight
+        ) < 50
+      ) {
+        cDistance =
+          ((landmarks[8].y + landmarks[4].y) / 2) * window.innerHeight;
+        console.log("pDistance: " + pDistance);
+        console.log("cDistance " + cDistance);
+        console.log(cDistance - pDistance);
+        window.scrollBy(0, (cDistance - pDistance) * -3);
+        pDistance = cDistance;
+        count++;
+        console.log(count);
+      } else {
+        pDistance =
+          ((landmarks[8].y + landmarks[4].y) / 2) * window.innerHeight;
       }
-      else {
-        pDistance = ((landmarks[8].y + landmarks[4].y) / 2 * window.innerHeight)
-      }
-
     }
   }
   canvasCtx.restore();
@@ -70,10 +81,9 @@ const camera = new Camera(videoElement, {
 });
 camera.start();
 
-
 //scrolling stuff
 window.scroll({
   top: 100,
   left: 100,
-  behavior: 'smooth'
+  behavior: "smooth",
 });
