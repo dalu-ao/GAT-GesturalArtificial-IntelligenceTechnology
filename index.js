@@ -2,6 +2,8 @@ const videoElement = document.getElementsByClassName("input_video")[0];
 const canvasElement = document.getElementsByClassName("output_canvas")[0];
 const note = document.getElementById("state");
 const canvasCtx = canvasElement.getContext("2d");
+let cDistance = 0
+let pDistance = 0
 
 function onResults(results) {
   canvasCtx.save();
@@ -28,11 +30,13 @@ function onResults(results) {
       if (landmarks[8].y > landmarks[7].y) {
         note.textContent = "index finger down";
       }
+
       if (Math.hypot((landmarks[8].x - landmarks[4].x) * window.innerWidth, (landmarks[8].y - landmarks[4].y) * window.innerHeight) < 50 ){
-        let prevDistance = ((landmarks[8].y + landmarks[4].y) / 2 * window.innerHeight)
-        console.log(prevDistance)
+        cDistance = ((landmarks[8].y + landmarks[4].y) / 2 * window.innerHeight)
+        console.log("pDistance: " + pDistance)
+        console.log("cDistance " + cDistance)
+        pDistance = cDistance
         window.scrollBy(0,10);
-        
       }
 
     }
