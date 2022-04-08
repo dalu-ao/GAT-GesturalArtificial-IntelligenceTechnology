@@ -37,7 +37,11 @@ vidoe {
   border-bottom: 3px solid #6868ce;
   box-shadow: 0 2px 3px 0;
 }
-
+.box {
+  width: 400px;
+  height: 400px;
+  background-color: red;
+}
 .alphabets {
   position: absolute;
   color: greenyellow;
