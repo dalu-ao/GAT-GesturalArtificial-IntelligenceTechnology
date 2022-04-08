@@ -45,6 +45,15 @@ const getGesture = function (points) {
     console.log("peace sign")
   }
   */
+
+  if (points[8].y < points[7].y
+    && points[12].y > points[9].y
+    && points[16].y > points[13].y
+    && points[20].y > points[17].y
+    && points[4].y < points[3].y
+  ) {
+    console.log("Pointing Up")
+  }
 };
 
 const getSign = function(points) {
@@ -53,6 +62,10 @@ const getSign = function(points) {
     && points[12].y < points[11].y
     && points[16].y < points[15].y
     && points[20].y < points[19].y
+    && points[20].x < points[16].x
+    && points[16].x < points[12].x
+    && points[12].x < points[8].x
+    && points[8].x < points[4].x
   ) {
     console.log("Sign for Hello")
   }
@@ -91,7 +104,6 @@ const getSign = function(points) {
   ) {
     console.log("Sign for No")
   }
-
 }
 
 function onResults(results) {
