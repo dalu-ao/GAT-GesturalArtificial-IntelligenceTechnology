@@ -36,7 +36,8 @@ function onResults(results) {
         console.log("pDistance: " + pDistance)
         console.log("cDistance " + cDistance)
         pDistance = cDistance
-        window.scrollBy(0,10);
+        console.log(cDistance - pDistance)
+        window.scrollBy(0, (cDistance - pDistance));
       }
 
     }
