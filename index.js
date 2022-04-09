@@ -6,6 +6,10 @@ const canvasCtx = canvasElement.getContext("2d");
 let cDistance = 0;
 let pDistance = 0;
 
+// Descript - getGesture method gets the current hand gesture of the user and returns the gesture
+//            as a string. getGesture differs from getSign as getSign is used for reading in sign words
+// Params -   List of points on the hand from the tensorflow class
+// Returns -  The gesture being made by the user
 const getGesture = function (points) {
   if (
     Math.hypot(
@@ -56,6 +60,11 @@ const getGesture = function (points) {
   }
 };
 
+
+// Descript - getSign returns the current sign language symbol that the user is making. This allows the user to
+//            enter words into the text-boxes using their hands
+// Params -   List of points on the hand from the tensorflow class
+// Returns -  The sign word being made by the user
 const getSign = function(points) {
   if (points[4].y < points[3].y
     && points[8].y < points[7].y
@@ -106,6 +115,7 @@ const getSign = function(points) {
   }
 }
 
+
 function onResults(results) {
   canvasCtx.save();
   canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
@@ -116,8 +126,8 @@ function onResults(results) {
     canvasElement.width,
     canvasElement.height
   );
+  
   if (results.multiHandLandmarks) {
-    let count = 0;
     for (const landmarks of results.multiHandLandmarks) {
       drawConnectors(canvasCtx, landmarks, HAND_CONNECTIONS, {
         color: "#00FF00",
@@ -125,26 +135,12 @@ function onResults(results) {
       });
       drawLandmarks(canvasCtx, landmarks, { color: "#FF0000", lineWidth: 2 });
 
-      if (landmarks[8].y < landmarks[7].y) {
-        note.textContent =
-          "X: " +
-          (landmarks[8].x * window.innerWidth).toString() +
-          "\nY: " +
-          (landmarks[8].y * window.innerHeight).toString();
-      }
-      if (landmarks[8].y > landmarks[7].y) {
-        note.textContent = "index finger down";
-      }
-
+      //for moving mouse with hands
       if (getGesture(landmarks) == "thumb_index_pinch") {
         cDistance =
           ((landmarks[8].y + landmarks[4].y) / 2) * window.innerHeight;
-        //console.log("pDistance: " + pDistance);
-        //console.log("cDistance " + cDistance);
-        //console.log(cDistance - pDistance);
         window.scrollBy(0, (cDistance - pDistance) * -3);
         pDistance = cDistance;
-        //console.log(count);
       } else {
         pDistance =
           ((landmarks[8].y + landmarks[4].y) / 2) * window.innerHeight;

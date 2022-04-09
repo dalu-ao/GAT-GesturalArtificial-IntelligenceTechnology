@@ -1,3 +1,4 @@
+
 const videoElement = document.getElementsByClassName("input_video")[0];
 const canvasElement = document.getElementsByClassName("output_canvas")[0];
 const canvasCtx = canvasElement.getContext("2d");
@@ -6,8 +7,12 @@ const feed = document.getElementById("feed");
 let messageContent = document.querySelector(".text-input");
 const send = document.querySelector(".send");
 let box = document.querySelector(".messagebox");
+let d = new Date();
+let Ctime = 0;
+let Ptime = 0;
 
 const sendMessage = function () {
+  Ptime = d.getTime() + 5000;
   let content = messageContent.value;
 
   if (content != "") {
@@ -107,10 +112,14 @@ function onResults(results) {
         lineWidth: 3,
       });
       drawLandmarks(canvasCtx, landmarks, { color: "#FF0000", lineWidth: 2 });
-
-      setTimeout(() => {
+      
+      d = new Date();
+      Ctime = d.getTime();
+      if ((Ptime - Ctime) < 0)
+      {
+        console.log("Entered function")
         sendMessage(writeMessage(getSign(landmarks)));
-      }, 10000);
+      }
     }
   }
   canvasCtx.restore();
