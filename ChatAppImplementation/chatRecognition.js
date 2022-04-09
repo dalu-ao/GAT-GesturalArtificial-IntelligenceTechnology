@@ -1,4 +1,3 @@
-
 const videoElement = document.getElementsByClassName("input_video")[0];
 const canvasElement = document.getElementsByClassName("output_canvas")[0];
 const canvasCtx = canvasElement.getContext("2d");
@@ -112,12 +111,10 @@ function onResults(results) {
         lineWidth: 3,
       });
       drawLandmarks(canvasCtx, landmarks, { color: "#FF0000", lineWidth: 2 });
-      
+
       d = new Date();
       Ctime = d.getTime();
-      if ((Ptime - Ctime) < 0)
-      {
-        console.log("Entered function")
+      if (Ptime - Ctime < 0) {
         sendMessage(writeMessage(getSign(landmarks)));
       }
     }
