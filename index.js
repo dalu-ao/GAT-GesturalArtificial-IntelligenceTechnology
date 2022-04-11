@@ -1,8 +1,12 @@
+
+
 const videoElement = document.getElementsByClassName("input_video")[0];
 const canvasElement = document.getElementsByClassName("output_canvas")[0];
 const note = document.getElementById("state");
 const canvasCtx = canvasElement.getContext("2d");
 
+
+//Calculate Scroll distance
 let cDistance = 0;
 let pDistance = 0;
 
