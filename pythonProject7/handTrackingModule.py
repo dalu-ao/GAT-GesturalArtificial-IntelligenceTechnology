@@ -3,6 +3,7 @@ import mediapipe as mp
 import time
 import math
 import numpy as np
+import random
 
 class handDetector():
     def __init__(self, mode=False, maxHands=2, complexity=1, detectionCon=0.5, trackCon=0.5):
