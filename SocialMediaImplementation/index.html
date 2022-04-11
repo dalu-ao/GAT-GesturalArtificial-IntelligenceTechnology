@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Twitter</title>
+    <script
+    src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"
+    crossorigin="anonymous"
+  ></script>
+  <script
+    src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils/control_utils.js"
+    crossorigin="anonymous"
+  ></script>
+  <script
+    src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js"
+    crossorigin="anonymous"
+  ></script>
+  <script
+    src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js"
+    crossorigin="anonymous"
+  ></script>
+  <link rel="stylesheet" href="main.css" />
+</head>
+    
+  </head>
+  <body>
+    <div class="containerz">
+        <video class="input_video"></video>
+        <canvas class="output_canvas" height="200"></canvas>
+      </div>
+    <img
+      id="cursor"
+      src="https://media.geeksforgeeks.org/wp-content/uploads/20200319212118/cursor2.png"
+      width="15"
+      height="20"
+    />
+    <div class="text-3xl text-center"><h2>Twitter UI Clone</h2></div>
+    <div class="min-h-screen">
+        <div class="container mx-auto px-4 py-4">
+          <div
+            id="feed"
+            class="max-w-lg bg-white border border-b-0 border-gray-200 mx-auto"
+          >
+          </div>
+        </div>
+      </div>
+    <script src="ai.js" type="module"></script>
+  </body>
+</html>
